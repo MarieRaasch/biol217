@@ -15,3 +15,6 @@ cp source destination
 ```
 
 this is the command `cp`
+
+# Task: Practice how to upload images and links 
+
