@@ -100,6 +100,16 @@ done
 
 
 ## Assembly 
+### megahit
+
+```
+cd /work_beegfs/sunam236/Metagenomics/2_fastp
+
+megahit -1 BGR_130305_mapped_R1_clean.fastq.gz -1 BGR_130527_mapped_R1_clean.fastq.gz -1 BGR_130708_mapped_R1_clean.fastq.gz -2 BGR_130305_mapped_R2_clean.fastq.gz -2 BGR_130527_mapped_R2_clean.fastq.gz -2 BGR_130708_mapped_R2_clean.fastq.gz
+--min-contig-len 1000 --presets meta-large -m 0.85 -o ../3_coassembly -t 12 
+
+```
+
 
 
 
