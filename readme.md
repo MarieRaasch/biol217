@@ -110,6 +110,6 @@ megahit -1 BGR_130305_mapped_R1_clean.fastq.gz -1 BGR_130527_mapped_R1_clean.fas
 
 ```
 
-
+To view the error file whilst running: `tail file.err`
 
 
