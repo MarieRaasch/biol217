@@ -61,4 +61,45 @@ Kopieren und im Rechner öffnen
 scp sunam236@caucluster.rz.uni-kiel.de:/work_beegfs/sunam236/Metagenomics/1_fastqc/*.html .
 ```
 
+### fastp
+
+fastp -i ? -I ? -R ? -o ? -O ? -t 6 -q 20
+Sample 1 
+```
+fastp -i BGR_130305_mapped_R1.fastq.gz -I BGR_130305_mapped_R2.fastq.gz -R fastp_Report -o sample1_R1_clean.fastq.gz -O sample1_R2_clean.fastq.gz -t 5 -q 20
+```
+Sample 2 
+```
+fastp -i BGR_130527_mapped_R1.fastq.gz -I BBGR_130527_mapped_R2.fastq.gz -R fastp_Report -o sample1_R1_clean.fastq.gz -O sample1_R2_clean.fastq.gz -t 5 -q 20
+```
+Sample 3 
+```
+fastp -i BGR_130708_mapped_R1.fastq.gz -I BBGR_130708_mapped_R2.fastq.gz -R fastp_Report -o sample1_R1_clean.fastq.gz -O sample1_R2_clean.fastq.gz -t 5 -q 20
+```
+fastp 
+Loop: 
+```
+for i in `ls *_R1.fastq.gz`;
+do
+    second=`echo ${i} | sed 's/_R1/_R2/g'`
+    fastp -i ${i} -I ${second} -R "${i}"_report -o output_folder/"${i}" -O output_folder/"${second}" -t 6 -q 20
+
+done
+```
+
+
+> `--html` creates an .html report file in html format\
+>`-i` R1 
+>`-I` R2 
+>`-R` report title, here ‘_report’ is added to each file\
+>`-o` output_folder/R1.fastq.gz output file\
+>`-O` output_folder/R2.fastq.gz output file\
+>`-t` trim tail 1, default is 0, here 6 bases are trimmed\
+>`-q` 20 reads with a phred score of <=20 are trimmed
+
+
+
+## Assembly 
+
+
 
