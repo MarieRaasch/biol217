@@ -77,6 +77,8 @@ fastp -i ? -I ? -R ? -o ? -O ? -t 6 -q 20
 
 Sample 1 
 ```
+cd /work_beegfs/sunam236/Metagenomics/0_raw_reads
+
 fastp -i BGR_130305_mapped_R1.fastq.gz -I BGR_130305_mapped_R2.fastq.gz -R fastp_Report -o ../2_fast/BGR_130305_mapped_R1_clean.fastq.gz -O ../2_fast/BGR_130305_mapped_R2_clean.fastq.gz -t 6 -q 20
 ```
 Sample 2 
