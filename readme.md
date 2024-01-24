@@ -238,21 +238,27 @@ anvi-run-hmms -c contigs.db --num-threads 4
 
 Once you have your contigs database ready, and optionally your HMMs are run, you can take a quick look at it using the program anvi-display-contigs-stats:
 
-```srun --reservation=biol217 --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --nodelist=node002 /bin/bash```
+```srun --reservation=biol217 --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 /bin/bash```
+
 
 # Binning with Anvio
 
+## Sort and Index bam files 
+
 ```for i in *.bam; do anvi-init-bam $i -o "$i".sorted.bam; done```
 
+## Creating anvio profile 
 ```
 anvi-profile -i *.sorted.bam -c contigs.db --output-dir ../5_anvio_profiles 
 ```
-
 ```
 anvi-merge /PATH/TO/SAMPLE1/? /PATH/TO/SAMPLE2/? /PATH/TO/SAMPLE3/? -o ? -c ../5_anvio_profiles/contigs.db  --enforce-hierarchical-clustering
 ```
-
+## Binning with Metabat2 
 ```
 anvi-cluster-contigs -p ? -c ../5_anvio_profiles/contigs.db -C METABAT --driver metabat2 --just-do-it --log-file log-metabat2
-anvi-summarize -p /PATH/TO/merged_profiles/? -c ? -o SUMMARY_METABAT -C ?```
+anvi-summarize -p /PATH/TO/merged_profiles/? -c ? -o SUMMARY_METABAT -C ?
+```
+
+## Binning with Max Bin2 
 
