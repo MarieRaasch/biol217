@@ -168,9 +168,22 @@ N50 is the length for which the collection of all contigs of that length or long
 The first thing you will do is format your fasta sequence IDs. Anvi’o (which you will use later) needs this step to work
 properly. Run this with your contigs and with your clean reads (Hint: fastp output). As the names get changed, you need to run it on your assembly file, otherwise the names of the contigs won't match the names of the initial reads (essential for the mapping step below).
 
+Batch Script
+
 ```sh
 cd /work_beegfs/sunam236/Metagenomics/3_coassembly
 
 anvi-script-reformat-fasta final.contigs.fa -o ../3_binning_out/contigs.anvio.fa  --min-len 1000 --simplify-names --report-file name_conversion.txt
 ```
 
+## Mapping 
+
+Then you need to map your raw reads onto your assembled contigs. Mapping will be done using bowtie2. Use the following command to index your mapping reference fasta file. Needed for the next steps and basically makes mapping faser.
+
+```module load bowtie2
+bowtie2-build contigs.anvio.fa contigs.anvio.fa.index```
+
+```
+module load bowtie2
+bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/sample1_R1_clean.fastq.gz -2 /PATH/TO/sample1_R2_clean.fastq.gz -S SAMPLE.sam
+```
