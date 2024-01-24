@@ -215,3 +215,28 @@ samtools view -bS BGR_130527.sam > BGR_130527_bam_file.bam
 samtools view -bS BGR_130708.sam > BGR_130708_bam_file.bam
 ```
 
+# Contigs Data preparation 
+
+You need to convqqase is an anvi’o contigs-db database that contains key information associated with your sequences.
+
+```
+cd /work_beegfs/sunam236/Metagenomics/3_binning_out
+anvi-gen-contigs-database -f contigs.anvio.fa -o ../5_anvio_profiles/contigs.db -n 'biol217'
+```
+
+-f contig.fa files, used as input
+-o will give you a .db file as output
+
+When you run this command, anvi-gen-contigs-database will (documentation anvi-gen-contigs-database)
+
+Then you need to perform an HMM search on your contigs. "Basically, in anvi’o, Hidden Markov Models (or HMMs for short) are used to search for specific genes with known functions in a larger dataset" (documentation [anvi-run-hmms] (https://anvio.org/help/7/programs/anvi-run-hmms/)
+
+```cd /work_beegfs/sunam236/Metagenomics/5_anvio_profiles
+
+anvi-run-hmms -c contigs.db --num-threads 4
+```
+
+Once you have your contigs database ready, and optionally your HMMs are run, you can take a quick look at it using the program anvi-display-contigs-stats:
+
+```srun --reservation=biol217 --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --nodelist=node002 /bin/bash```
+
