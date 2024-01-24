@@ -121,6 +121,8 @@ Checking if assembly worked:
 
 `$ tail final.contigs.fa ` 
 
+To count the number of contigs in your final assembly file:
+
 `grep -c ">" final.contigs.fa`
 55838
 
@@ -128,4 +130,47 @@ To visualize contig graph in Bandage, the first step is to convert the fasta fil
 
 `megahit_toolkit contig2fastg 99 final.contigs.fa > final.contigs.fastg`
 
+
+## Quality Assessment
+
+**QU**ality **AS**sessment **T**ool to evaluate genome assembly.
+
+metaquast -t 6 -o ? -m 1000 ?
+
+Batch Script 
+```
+cd /work_beegfs/sunam236/Metagenomics/3_coassembly
+
+metaquast -t 6 -o ../3_metaquast_out -m 1000
+```
+Looking at our report.pdf in local Dektop
+```sh
+scp sunam236@caucluster.rz.uni-kiel.de:/work_beegfs/sunam236/Metagenomics/3_metaquast_out/report.pdf . 
+```
+
+**What is your N50 value?**     
+3014
+
+**Why is this value relevant?**
+
+N50 is the length for which the collection of all contigs of that length or longer covers at least half an assembly.
+
+**How many contigs are assembled?**
+
+55838
+
+**What is the total length of the contigs?**
+
+142642670
+
+## Genomes Binning 
+
+The first thing you will do is format your fasta sequence IDs. Anvi’o (which you will use later) needs this step to work
+properly. Run this with your contigs and with your clean reads (Hint: fastp output). As the names get changed, you need to run it on your assembly file, otherwise the names of the contigs won't match the names of the initial reads (essential for the mapping step below).
+
+```sh
+cd /work_beegfs/sunam236/Metagenomics/3_coassembly
+
+anvi-script-reformat-fasta final.contigs.fa -o ../3_binning_out/contigs.anvio.fa  --min-len 1000 --simplify-names --report-file name_conversion.txt
+```
 
