@@ -24,7 +24,7 @@ this is the command `cp`
 
 ## Quality control
 
-Anvio_slurm.txt
+Anvio_slurm.txt - Datei für Batch Skript 
 
 
 ```sh
@@ -113,5 +113,19 @@ megahit -1 BGR_130305_mapped_R1_clean.fastq.gz -1 BGR_130527_mapped_R1_clean.fas
 ```
 
 To view the error file whilst running: `tail file.err`
+
+### Day 3
+
+
+Checking if assembly worked: 
+
+`$ tail final.contigs.fa ` 
+
+`grep -c ">" final.contigs.fa`
+55838
+
+To visualize contig graph in Bandage, the first step is to convert the fasta file(s) intermediate_contigs/k{kmer_size}.contigs.fa into SPAdes-like FASTG format. The following code shows the translation from NAME.contigs.fa into NAME.fastg.
+
+`megahit_toolkit contig2fastg 99 final.contigs.fa > final.contigs.fastg`
 
 
