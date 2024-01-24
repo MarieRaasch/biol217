@@ -192,5 +192,13 @@ bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/BGR_130305_mapped_R1
 bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/BGR_130527_mapped_R1_clean.fastq.gz -2 ../2_fastp/BGR_130527_mapped_R2_clean.fastq.gz -S BGR_130527.sam
 
 
-bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/BGR_130708_mapped_R1_clean.fastq.gz -2 ../2_fastp/BGR_130708_mapped_R2_clean.fastq.gz -S BGR_130708.sam```
+bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/BGR_130708_mapped_R1_clean.fastq.gz -2 ../2_fastp/BGR_130708_mapped_R2_clean.fastq.gz -S BGR_130708.sam
+```
+
+--very-fast bowtie runs in very fast but less accurate end-to-end mode
+-x index files with the contigs from the step before, give it the prefix name of the files (the part that comes before the dot)
+
+-1 R1 fasta file containing the raw reads after fastp processing
+-2 R2 fasta file containing the raw reads after fastp processing
+-S name of the output file, don't forget the .sam part!
 
