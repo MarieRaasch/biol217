@@ -180,10 +180,17 @@ anvi-script-reformat-fasta final.contigs.fa -o ../3_binning_out/contigs.anvio.fa
 
 Then you need to map your raw reads onto your assembled contigs. Mapping will be done using bowtie2. Use the following command to index your mapping reference fasta file. Needed for the next steps and basically makes mapping faser.
 
-```module load bowtie2
-bowtie2-build contigs.anvio.fa contigs.anvio.fa.index```
+```cd /work_beegfs/sunam236/Metagenomics/3_binning_out
 
-```
 module load bowtie2
-bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/sample1_R1_clean.fastq.gz -2 /PATH/TO/sample1_R2_clean.fastq.gz -S SAMPLE.sam
-```
+bowtie2-build contigs.anvio.fa contigs.anvio.fa.index
+
+
+bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/BGR_130305_mapped_R1_clean.fastq.gz -2 ../2_fastp/BGR_130305_mapped_R2_clean.fastq.gz -S BGR_130305.sam
+
+
+bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/BGR_130527_mapped_R1_clean.fastq.gz -2 ../2_fastp/BGR_130527_mapped_R2_clean.fastq.gz -S BGR_130527.sam
+
+
+bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/BGR_130708_mapped_R1_clean.fastq.gz -2 ../2_fastp/BGR_130708_mapped_R2_clean.fastq.gz -S BGR_130708.sam```
+
