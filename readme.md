@@ -240,3 +240,19 @@ Once you have your contigs database ready, and optionally your HMMs are run, you
 
 ```srun --reservation=biol217 --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --nodelist=node002 /bin/bash```
 
+# Binning with Anvio
+
+```for i in *.bam; do anvi-init-bam $i -o "$i".sorted.bam; done```
+
+```
+anvi-profile -i *.sorted.bam -c contigs.db --output-dir ../5_anvio_profiles 
+```
+
+```
+anvi-merge /PATH/TO/SAMPLE1/? /PATH/TO/SAMPLE2/? /PATH/TO/SAMPLE3/? -o ? -c ../5_anvio_profiles/contigs.db  --enforce-hierarchical-clustering
+```
+
+```
+anvi-cluster-contigs -p ? -c ../5_anvio_profiles/contigs.db -C METABAT --driver metabat2 --just-do-it --log-file log-metabat2
+anvi-summarize -p /PATH/TO/merged_profiles/? -c ? -o SUMMARY_METABAT -C ?```
+
