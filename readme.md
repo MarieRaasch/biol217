@@ -202,3 +202,16 @@ bowtie2 --very-fast -x contigs.anvio.fa.index -1 ../2_fastp/BGR_130708_mapped_R1
 -2 R2 fasta file containing the raw reads after fastp processing
 -S name of the output file, don't forget the .sam part!
 
+The output will be a sequence mapping file (SAM) with the .sam extension and which we convert to binary alignment and map (BAM) file with the .bam extension using samtools with the following loop:
+
+SAMtools
+
+```
+module load samtools
+samtools view -bS BGR_130305.sam > BGR_130305_bam_file.bam
+
+samtools view -bS BGR_130527.sam > BGR_130527_bam_file.bam
+
+samtools view -bS BGR_130708.sam > BGR_130708_bam_file.bam
+```
+
