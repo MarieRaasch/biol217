@@ -302,7 +302,7 @@ Estimate your genomes completeness and contamination levels.
 You can assess the quality of your bins by using
 
 ```
-anvi-estimate-genome-completeness -c ./5_anvio_profiles/contigs.db -p ./6_anvimerge/PROFILE.db -C METABAT2
+anvi-estimate-genome-completeness -c ./5_anvio_profiles/contigs.db -p ./6_anvimerge/PROFILE.db -C METABAT
 ```
 If you want to check what collections you generated you can use:
 
@@ -312,5 +312,55 @@ anvi-estimate-genome-completeness -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profi
 Visualize results:
 
 ```
-srun --reservation=biol217 --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --nodelist=node002 /bin/bash
+
+anvi-interactive -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -C METABAT
+
 ```
+
+## Results
+
+Number of Archea with Metabat2: 1
+1x 98,68% Coverage and 3,94% Redundancy
+
+Number of Archea with Maxbin2: 1
+94,7 % Coverage and 73,68% Redundancy 
+
+Which binning strategy gives you the best quality for the Archaea
+bins??
+
+METABAT 98,68% Coverage and 3,94% Redundancy
+
+Maxbin2: 94,7 % Coverage and 73,68% Redundancy 
+
+How many Archaea bins do you get that are of High Quality? 1
+
+1
+
+How many Bacteria bins do you get that are of High Quality?
+
+# Day 4 
+
+## Bin Refinement 
+
+Im Temrinal
+```
+anvi-summarize -p./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db --list-collections
+
+anvi-summarize -c ./5_anvio_profiles/contigs.db -p ./6_anvimerge/PROFILE.db  -C METABAT -o SUMMARY_METABAT2 --just-do-it
+
+```
+
+```
+cd ./SUMMARY_METABAT2/bin_by_bin/
+
+mkdir ../../ARCHAEA_BIN_REFINEMENT
+
+cp ./METABAT__6-contigs.fa ../../ARCHAEA_BIN_REFINEMENT/
+
+cp ./METABAT__10/*.fa ../../ARCHAEA_BIN_REFINEMENT/
+```
+```anvi-estimate-genome-completeness -c ./5_anvio_profiles/contigs.db -p ./6_anvimerge/PROFILE.db -C METABAT > METABAT_table.txt
+```
+
+-> METABAT__6 & 10 
+
