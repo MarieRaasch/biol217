@@ -238,7 +238,26 @@ anvi-run-hmms -c contigs.db --num-threads 4
 
 Once you have your contigs database ready, and optionally your HMMs are run, you can take a quick look at it using the program anvi-display-contigs-stats:
 
-```srun --reservation=biol217 --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 /bin/bash```
+```sh
+srun --reservation=biol217 --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --nodelist=n100 --partition=base /bin/bash
+```
+
+```sh
+conda activate anvio-8
+
+anvi-display-contigs-stats contigs.db
+```
+
+Neues Terminal Fenster: 
+
+```sh
+ssh -L 8060:localhost:8080 sunam236@caucluster.rz.uni-kiel.de
+ssh -L 8080:localhost:8080 n100
+```
+
+Im Browser
+
+```http://127.0.0.1:8060```
 
 
 # Binning with Anvio
@@ -257,13 +276,17 @@ anvi-profile -i BGR_130527_bam_file.bam.sorted.bam -c ../5_anvio_profiles/contig
 anvi-profile -i BGR_130708_bam_file.bam.sorted.bam -c ../5_anvio_profiles/contigs.db --output-dir ../5_anvio_profiles/130708
 
 ```
+Merging the profiles coming from your different samples into one profile:
+
 ```
-anvi-merge /5_anvio_profiles/130305 /5_anvio_profiles/130527 /5_anvio_profiles/130708 -o ../6_anvimerge -c ../5_anvio_profiles/contigs.db  --enforce-hierarchical-clustering
+anvi-merge ./5_anvio_profiles/130305/PROFILE.db ./5_anvio_profiles/130527/PROFILE.db ./5_anvio_profiles/130708/PROFILE.db -o ./6_anvimerge -c ./5_anvio_profiles/contigs.db  --enforce-hierarchical-clustering
 ```
+
+
 ## Binning with Metabat2 
 ```
-anvi-cluster-contigs -p ? -c ../5_anvio_profiles/contigs.db -C METABAT --driver metabat2 --just-do-it --log-file log-metabat2
-anvi-summarize -p /PATH/TO/merged_profiles/? -c ? -o SUMMARY_METABAT -C ?
+anvi-cluster-contigs -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -C METABAT --driver metabat2 --just-do-it --log-file log-metabat2
+anvi-summarize -p /PATH/TO/merged_profiles/? -c ./5_anvio_profiles/contigs.db -o SUMMARY_METABAT -C METABAT
 ```
 
 ## Binning with Max Bin2 
