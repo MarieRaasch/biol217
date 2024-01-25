@@ -250,15 +250,15 @@ Once you have your contigs database ready, and optionally your HMMs are run, you
 ## Creating anvio profile 
 ```
 
-anvi-profile -i BGR_130305_bam_file.bam.sorted.bam -c ../5_anvio_profiles/contigs.db --output-dir ../5_1_anvio_profiles
+anvi-profile -i BGR_130305_bam_file.bam.sorted.bam -c ../5_anvio_profiles/contigs.db --output-dir ../5_anvio_profiles/130305
 
-anvi-profile -i BGR_130527_bam_file.bam.sorted.bam -c ../5_anvio_profiles/contigs.db --output-dir ../5_2_anvio_profiles
+anvi-profile -i BGR_130527_bam_file.bam.sorted.bam -c ../5_anvio_profiles/contigs.db --output-dir ../5_anvio_profiles/130527
 
-anvi-profile -i BGR_130708_bam_file.bam.sorted.bam -c ../5_anvio_profiles/contigs.db --output-dir ../5_3_anvio_profiles
+anvi-profile -i BGR_130708_bam_file.bam.sorted.bam -c ../5_anvio_profiles/contigs.db --output-dir ../5_anvio_profiles/130708
 
 ```
 ```
-anvi-merge /PATH/TO/SAMPLE1/? /PATH/TO/SAMPLE2/? /PATH/TO/SAMPLE3/? -o ? -c ../5_anvio_profiles/contigs.db  --enforce-hierarchical-clustering
+anvi-merge /5_anvio_profiles/130305 /5_anvio_profiles/130527 /5_anvio_profiles/130708 -o ../6_anvimerge -c ../5_anvio_profiles/contigs.db  --enforce-hierarchical-clustering
 ```
 ## Binning with Metabat2 
 ```
