@@ -296,4 +296,21 @@ anvi-summarize -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -o S
 anvi-cluster-contigs -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -C MAXBIN2 --driver maxbin2 --just-do-it --log-file log-maxbin2
 anvi-summarize -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -o SUMMARY_MAXBIN2 -C MAXBIN2
 ```
+## MAGs Quality Estimation 
 
+Estimate your genomes completeness and contamination levels.
+You can assess the quality of your bins by using
+
+```
+anvi-estimate-genome-completeness -c ./5_anvio_profiles/contigs.db -p ./6_anvimerge/PROFILE.db -C METABAT2
+```
+If you want to check what collections you generated you can use:
+
+```
+anvi-estimate-genome-completeness -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db --list-collections 
+```
+Visualize results:
+
+```
+srun --reservation=biol217 --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --nodelist=node002 /bin/bash
+```
