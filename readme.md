@@ -281,13 +281,19 @@ Merging the profiles coming from your different samples into one profile:
 ```
 anvi-merge ./5_anvio_profiles/130305/PROFILE.db ./5_anvio_profiles/130527/PROFILE.db ./5_anvio_profiles/130708/PROFILE.db -o ./6_anvimerge -c ./5_anvio_profiles/contigs.db  --enforce-hierarchical-clustering
 ```
+### Here you are going to use two binners Metabat2 and MaxBin2.
 
+## Binning with Metabat2
 
-## Binning with Metabat2 
 ```
 anvi-cluster-contigs -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -C METABAT --driver metabat2 --just-do-it --log-file log-metabat2
-anvi-summarize -p /PATH/TO/merged_profiles/? -c ./5_anvio_profiles/contigs.db -o SUMMARY_METABAT -C METABAT
+anvi-summarize -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -o SUMMARY_METABAT -C METABAT
 ```
 
 ## Binning with Max Bin2 
+
+```
+anvi-cluster-contigs -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -C MAXBIN2 --driver maxbin2 --just-do-it --log-file log-maxbin2
+anvi-summarize -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -o SUMMARY_MAXBIN2 -C MAXBIN2
+```
 
