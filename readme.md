@@ -381,6 +381,25 @@ hint: look at the CSS score (explained in the lecture) and the column PASS GUNC 
 
 In your own words (2 sentences max), explain what is a chimeric bin.
 
+
 ## Manual Bin refinement 
 
 
+```
+cd /work_beegfs/sunam236/Metagenomics/ARCHAEA_BIN_REFINEMENT
+
+anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ../6_anvimerge/PROFILE.db --bin-id Bin_METABAT__10
+
+anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ../6_anvimerge/PROFILE.db --bin-id Bin_METABAT__6
+```
+
+```
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8
+
+anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ./6_anvimerge/PROFILE.db --bin-id METABAT__6
+
+anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ./6_anvimerge/PROFILE.db --bin-id METABAT__10
+
+```
