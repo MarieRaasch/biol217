@@ -364,3 +364,23 @@ cp ./METABAT__10/*.fa ../../ARCHAEA_BIN_REFINEMENT/
 
 -> METABAT__6 & 10 
 
+# Chimera detection in MAGs
+
+Use GUNC to check run chimera detection.
+
+```
+cd /work_beegfs/sunam236/Metagenomics/ARCHAEA_BIN_REFINEMENT
+
+mkdir GUNC
+
+for i in *.fa; do gunc run -i "$i" -r /work_beegfs/sunam236/Databases/gunc_db_progenomes2.1.dmnd --out_dir GUNC --threads 10 --detailed_output; done
+
+```
+Do you get bins that are chimeric?
+hint: look at the CSS score (explained in the lecture) and the column PASS GUNC in the tables outputs per bin in your gunc_output folder.
+
+In your own words (2 sentences max), explain what is a chimeric bin.
+
+## Manual Bin refinement 
+
+
