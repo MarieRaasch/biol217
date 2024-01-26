@@ -369,11 +369,20 @@ cp ./METABAT__10/*.fa ../../ARCHAEA_BIN_REFINEMENT/
 Use GUNC to check run chimera detection.
 
 ```
+
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate gunc
+
 cd /work_beegfs/sunam236/Metagenomics/ARCHAEA_BIN_REFINEMENT
 
 mkdir GUNC
 
 for i in *.fa; do gunc run -i "$i" -r /work_beegfs/sunam236/Databases/gunc_db_progenomes2.1.dmnd --out_dir GUNC --threads 10 --detailed_output; done
+
+gunc plot -d ./GUNC/diamond_output/METABAT__10-contigs.diamond.progenomes_2.1.out -g ./GUNC/genes_calls/gene_counts.json
+
+gunc plot -d ./GUNC/diamond_output/METABAT__6-contigs.diamond.progenomes_2.1.out -g ./GUNC/genes_calls/gene_counts.json
 
 ```
 Do you get bins that are chimeric?
@@ -392,14 +401,48 @@ anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ../6_anvimerge/PROFI
 
 anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ../6_anvimerge/PROFILE.db --bin-id Bin_METABAT__6
 ```
+Runnen im Terminal 
 
 ```
 module load gcc12-env/12.1.0
 module load miniconda3/4.12.0
 conda activate anvio-8
 
-anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ./6_anvimerge/PROFILE.db --bin-id METABAT__6
+anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ../6_anvimerge/PROFILE.db --bin-id METABAT__6
 
-anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ./6_anvimerge/PROFILE.db --bin-id METABAT__10
+anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ../6_anvimerge/PROFILE.db --bin-id METABAT__10
 
 ```
+METABAT 6 Sieht gut aus, nicht wird gelöscht
+
+METABAT 10 Coverage zu niedrig; mit dem Sample wird nicht weitergearbeitet 
+
+
+    how abundant are the archaea bins in the 3 samples? (relative abundance)
+    **you can also use anvi-inspect -p -c, anvi-script-get-coverage-from-bam or, anvi-profile-blitz. Please look up the help page for each of those commands and construct the appropriate command line
+
+```anvi-inspect -p ../6_anvimerge/PROFILE.db -c ../5_anvio_profiles/contigs.db --split-nam ```
+
+```anvi-script-get-coverage-from-bam -b  -C collection-txt -m bin```
+
+## Day 5 
+
+Taxonomic assignment 
+
+anvi-run-scg-taxonomy associates the single-copy core genes in your contigs-db with taxnomy information
+
+```anvi-run-scg-taxonomy -c ./5_anvio_profiles/contigs.db -T 20 -P 2```
+
+Now you can run anvi-estimate-scg-taxonomy, ‘This program makes quick taxonomy estimates for genomes, metagenomes, or bins stored in your contigs-db using single-copy core genes. 
+
+To estimate abundance of Ribosomal RNAs within your dataset (coverage) use:
+
+```anvi-estimate-scg-taxonomy -c ./5_anvio_profiles/contigs.db -p ../6_anvimerge/PROFILE.db --metagenome-mode --compute-scg-coverages --update-profile-db-with-taxonomy > temp.txt```
+
+ONE final summary to get comprehensive info about your METABAT2 bins:
+
+```anvi-summarize -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db --metagenome-mode -o ./SUMMARY_METABAT2 -C METABAT2```
+
+
+
+
