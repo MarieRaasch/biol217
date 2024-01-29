@@ -425,6 +425,17 @@ METABAT 10 Coverage zu niedrig; mit dem Sample wird nicht weitergearbeitet
 
 ```anvi-script-get-coverage-from-bam -b  -C collection-txt -m bin```
 
+
+Mean coverage: `cd /work_beegfs/sunam236/Metagenomics/ARCHAEA_BIN_REFINEMENT/bin_by_bin/METABAT__6-mean_coverage.txt`
+
+`cat METABAT__6-mean_coverage.txt`
+
+bin	BGR_130305_bam_file_bam_sorted: 8.200437007296363
+
+BGR_130527_bam_file_bam_sorted: 5.316715747262296
+
+BGR_130708_bam_file_bam_sorted: 3.4897028928552145
+
 ## Day 5 
 
 Taxonomic assignment 
