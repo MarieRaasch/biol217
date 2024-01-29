@@ -455,5 +455,53 @@ ONE final summary to get comprehensive info about your METABAT2 bins:
 ```anvi-summarize -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db --metagenome-mode -o ./SUMMARY_METABAT2 -C METABAT2```
 
 
+# Day 6 
 
+We will be using Absolute Paths in this tutorial. So, please make sure to use the correct paths. For Example: $WORK/genomics/0_raw_reads/
+
+`cd $WORK/genomics`
+
+creating output directory: 
+
+```
+mkdir 1_short_reads_qc
+```
+
+```#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=128G
+#SBATCH --time=5:00:00
+#SBATCH --job-name=01_fastqc
+#SBATCH --output=01_fastqc.out
+#SBATCH --error=01_fastqc.err
+#SBATCH --partition=base
+#SBATCH --reservation=biol217
+
+module load gcc12-env/12.1.0
+module load micromamba/1.4.2
+micromamba activate 01_short_reads_qc
+
+
+# creata new folder for output of qc 
+mkdir -p $WORK/genomics/1_short_reads_qc/1_fastqc_raw
+for i in $WORK/genomics/0_raw_reads/short_reads/*.gz; do fastqc $i -o $WORK/genomics/1_short_reads_qc/1_fast_pc_raw -t 32; done
+
+jobinfo```
+
+```
+1.2 fastp 
+#mkdir -p $WORK/genomics/1_short_reads_qc/2_cleaned_reads
+#fastp -i $WORK/genomics/0_raw_reads/short_reads/241155E_R1.fastq.gz \
+ #-I $WORK/genomics/0_raw_reads/short_reads/241155E_R2.fastq.gz \
+ #-R $WORK/genomics/1_short_reads_qc/2_cleaned_reads/fastp_report \
+ #-h $WORK/genomics/1_short_reads_qc/2_cleaned_reads/report.html \
+ #-o $WORK/genomics/1_short_reads_qc/2_cleaned_reads/241155E_R1_clean.fastq.gz \
+ #-O $WORK/genomics/1_short_reads_qc/2_cleaned_reads/241155E_R2_clean.fastq.gz -t 6 -q 25
+```
+```
+# create a new folder for output of qc 
+mkdir -p $WORK/genomics/1_short_reads_qc/3_fastqc_cleaned
+for i in $WORK/genomics/1_short_reads_qc/2_cleaned_reads/*.gz; do fastqc $i -o $WORK/genomics/1_short_reads_qc/3_fastqc_cleaned -t 32; done
+```
 
