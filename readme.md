@@ -659,3 +659,28 @@ module purge
 jobinfo
 ```
 
+# Multi QC report
+
+### How good is the quality of genome?
+
+Good read quality (98,4% passed the filter) 
+
+
+### Why did we use Hybrid assembler?
+To combine short reads and long reads to get a better assembly. 
+
+What is the difference between short and long reads?
+
+Short reads are produced by Illumina and and are about 150 bp long
+
+### Did we use Single or Paired end reads? Why?
+
+For long reads you do not use paired ends as it is not neccesary.
+
+### Write down about the classification of genome we have used here
+
+
+d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides sp002491635
+
+								
+
