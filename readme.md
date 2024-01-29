@@ -503,5 +503,25 @@ jobinfo```
 # create a new folder for output of qc 
 mkdir -p $WORK/genomics/1_short_reads_qc/3_fastqc_cleaned
 for i in $WORK/genomics/1_short_reads_qc/2_cleaned_reads/*.gz; do fastqc $i -o $WORK/genomics/1_short_reads_qc/3_fastqc_cleaned -t 32; done
-```
 
+
+
+
+How Good is the read quality?
+
+Good 
+
+How many reads do you had before trimming and how many do you have now?
+
+R1
+Before trimming: 1639549
+After trimming: 1613392
+
+R2
+Before trimming: 1639549
+After trimming: 1613392
+
+
+Did the quality of the reads improve after trimming?
+
+Yes
