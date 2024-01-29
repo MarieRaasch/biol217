@@ -525,3 +525,52 @@ After trimming: 1613392
 Did the quality of the reads improve after trimming?
 
 Yes
+
+# Long reads
+## NanoPlot & Filtlong 
+
+```#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=128G
+#SBATCH --time=5:00:00
+#SBATCH --job-name=02_long_reads_qc
+#SBATCH --output=02_long_reads_qc.out
+#SBATCH --error=02_long_reads_qc.err
+#SBATCH --partition=base
+#SBATCH --reservation=biol217
+
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+module load micromamba/1.4.2
+
+echo "---------long reads cleaning started---------"
+eval "$(micromamba shell hook --shell=bash)"
+micromamba activate 02_long_reads_qc
+
+## 2.1 Nanoplot raw
+cd $WORK/genomics/0_raw_reads/long_reads/
+mkdir -p $WORK/genomics/2_long_reads_qc/1_nanoplot_raw
+NanoPlot --fastq $WORK/genomics/0_raw_reads/long_reads/*.gz \
+ -o $WORK/genomics/2_long_reads_qc/1_nanoplot_raw -t 32 \
+ --maxlength 40000 --minlength 1000 --plots kde --format png \
+ --N50 --dpi 300 --store --raw --tsv_stats --info_in_report
+
+## 2.2 Filtlong
+mkdir -p $WORK/genomics/2_long_reads_qc/2_cleaned_reads
+filtlong --min_length 1000 --keep_percent 90 $WORK/genomics/0_raw_reads/long_reads/*.gz | gzip > $WORK/genomics/2_long_reads_qc/2_cleaned_reads/241155E_cleaned_filtlong.fastq.gz
+
+## 2.3 Nanoplot cleaned
+cd $WORK/genomics/2_long_reads_qc/2_cleaned_reads
+mkdir -p $WORK/genomics/2_long_reads_qc/3_nanoplot_cleaned
+NanoPlot --fastq $WORK/genomics/2_long_reads_qc/2_cleaned_reads/*.gz \
+ -o $WORK/genomics/2_long_reads_qc/3_nanoplot_cleaned -t 32 \
+ --maxlength 40000 --minlength 1000 --plots kde --format png \
+ --N50 --dpi 300 --store --raw --tsv_stats --info_in_report
+
+micromamba deactivate
+echo "---------long reads cleaning completed Successfully---------"
+
+module purge
+jobinfo```
+
