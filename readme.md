@@ -902,7 +902,59 @@ anvi-pan-genome -g V_jascida-GENOMES.db --project-name V_jascida --num-threads 4
 anvi-display-pan -p V_jascida/V_jascida-PAN.db -g V_jascida-GENOMES.db
 ```
 
+```
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=128G
+#SBATCH --time=5:00:00
+#SBATCH --job-name=anvio_pangenomics
+#SBATCH --output=anvio_pangenomics.out
+#SBATCH --error=anvio_pangenomics.err
+#SBATCH --partition=base
+#SBATCH --reservation=biol217
 
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8
+
+cd $WORK/pangenomics/pangenomics2/Genomes_pangenomics
+
+# ls *fasta > genomes.txt
+
+# remove all contigs <2500 nt
+for g in `cat genomes.txt`
+do
+    echo
+    echo "Working on $g ..."
+    echo
+    anvi-script-reformat-fasta ${g}.fasta \
+                               --min-len 2500 \
+                               --simplify-names \
+                               -o ${g}_scaffolds_2.5K.fasta
+done
+
+# generate contigs.db
+for g in `cat genomes.txt`
+do
+    echo
+    echo "Working on $g ..."
+    echo
+    anvi-gen-contigs-database -f ${g}_scaffolds_2.5K.fasta \
+                              -o ${g}.db \
+                              --num-threads 4 \
+                              -n ${g}
+done
+
+# annotate contigs.db
+for g in *.db
+do
+    anvi-run-hmms -c $g --num-threads 4
+    anvi-run-ncbi-cogs -c $g --num-threads 4
+    anvi-scan-trnas -c $g --num-threads 4
+    anvi-run-scg-taxonomy -c $g --num-threads 4
+done
+```
 
 
 
