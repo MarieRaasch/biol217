@@ -956,5 +956,32 @@ do
 done
 ```
 
+### Display
 
+```module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8
 
+anvi-display-contigs-stats $WORK/pangenomics/pangenomics2/Genomes_pangenomics/*db```
+
+### External genome files 
+
+```anvi-script-gen-genomes-file --input-dir $WORK/pangenomics/pangenomics2/Genomes_pangenomics/ -o external-genomes.txt
+```
+
+#### Investigate contamination 
+
+```cd Genomes_pangenomics
+anvi-estimate-genome-completeness -e external-genomes.txt
+
+```
+
+### Visualise 
+
+## Create Pangenome 
+
+```
+anvi-gen-genomes-storage -e external-genomes.txt -o My-GENOMES.db
+
+anvi-pan-genome -g My-GENOMES.db --project-name My_pangenome --num-threads 4  
+```
