@@ -657,6 +657,7 @@ echo "---------Multiqc Completed Successfully---------"
 
 module purge
 jobinfo
+```
 
 # Multi QC report
 
@@ -680,6 +681,228 @@ For long reads you do not use paired ends as it is not neccesary.
 
 
 d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides sp002491635
+
+bacter				
+
+# Day 7 
+## Run Panaroo statistics 
+
+```
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --time=15:00:00
+#SBATCH --job-name=panaroo
+#SBATCH --output=panaroo.out
+#SBATCH --error=panaroo.err
+#SBATCH --partition=base
+#SBATCH --reservation=biol217
+
+module load micromamba/1.4.2
+export MAMBA_ROOT_PREFIX=$HOME/.micromamba
+eval "$(micromamba shell hook --shell=bash)"
+module load micromamba/1.4.2
+micromamba activate 08_panaroo
+#creata a folder for panaroo
+mkdir -p $WORK/pangenomics/01_panaroo
+# run panaroo
+panaroo -i $WORK/pangenomics/gffs/*.gff -o $WORK/pangenomics/01_panaroo/pangenomics_results --clean-mode strict -t 12
+micromamba deactivate
+module purge
+jobinfo
+```
+
+summary statistics.txt
+
+Core genes	(99% <= strains <= 100%)	0
+Soft core genes	(95% <= strains < 99%)	0
+Shell genes	(15% <= strains < 95%)	9849
+Cloud genes	(0% <= strains < 15%)	0
+Total genes	(0% <= strains <= 100%)	9849
+
+-> No core genes in out sample: might be artefact 
+
+# Day 7b 
+
+```
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8
+
+# create new folder
+mkdir $WORK/pangenomics/02_anvio_pangenomics
+```
+
+Downloading data: 
+```
+curl -L https://ndownloader.figshare.com/files/28965090 -o V_jascida_genomes.tar.gz
+tar -zxvf V_jascida_genomes.tar.gz
+ls V_jascida_genomes
+```
+
+```
+cd $WORK/pangenomics/02_anvio_pangenomics/V_jascida_genomes/
+
+ls *fasta | awk 'BEGIN{FS="_"}{print $1}' > genomes.txt
+
+# remove all contigs <2500 nt
+for g in `cat genomes.txt`
+do
+    echo
+    echo "Working on $g ..."
+    echo
+    anvi-script-reformat-fasta ${g}_scaffolds.fasta \
+                               --min-len 2500 \
+                               --simplify-names \
+                               -o ${g}_scaffolds_2.5K.fasta
+done
+
+# generate contigs.db
+for g in `cat genomes.txt`
+do
+    echo
+    echo "Working on $g ..."
+    echo
+    anvi-gen-contigs-database -f ${g}_scaffolds_2.5K.fasta \
+                              -o V_jascida_${g}.db \
+                              --num-threads 4 \
+                              -n V_jascida_${g}
+done
+
+# annotate contigs.db
+for g in *.db
+do
+    anvi-run-hmms -c $g --num-threads 4
+    anvi-run-ncbi-cogs -c $g --num-threads 4
+    anvi-scan-trnas -c $g --num-threads 4
+    anvi-run-scg-taxonomy -c $g --num-threads 4
+done
+
+```
+
+## Visualize contigs.db
+
+```
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8
+
+anvi-display-contigs-stats /path/to.your/databases/*db
+```
+```
+srun --reservation=biol217 --pty --mem=16G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --partition=base /bin/bash
+
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8_biol217
+anvi-display-contigs-stats /path/to.your/databases/*db
+```
+```
+ssh -L 8060:localhost:8080 sunam236@caucluster.rz.uni-kiel.de
+
+ssh -L 8080:localhost:8080 n100
+
+```
+```
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8
+
+anvi-display-contigs-stats $WORK/pangenomics/02_anvio_pangenomics/V_jascida_genomes/*db
+
+```
+
+```
+srun --pty --mem=16G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --partition=base /bin/bash
+
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8
+anvi-display-contigs-stats $WORK/pangenomics/02_anvio_pangenomics/V_jascida_genomes/*db
+
+```
+## Create external genome files 
+
+```
+anvi-script-gen-genomes-file --input-dir $WORK/pangenomics/02_anvio_pangenomics/V_jascida_genomes/ -o external-genomes.txt
+                             
+```
+
+## Investigate contamination 
+
+```
+cd V_jascida_genomes
+
+anvi-estimate-genome-completeness -e external-genomes.txt > contamination_completeness.txt
+
+```
+
+## Visualize contigs for refinement 
+
+```
+anvi-profile -c V_jascida_52.db --sample-name V_jascida_52 --output-dir V_jascida_52 --blank
+
+```
+
+```
+srun --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --partition=base /bin/bash
+
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8
+
+anvi-interactive -c V_jascida_52.db -p V_jascida_52/PROFILE.db
+                 
+```
+
+```
+ssh -L 8060:localhost:8080 sunam226@caucluster.rz.uni-kiel.de
+
+ssh -L 8080:localhost:8080 n100
+```
+
+```
+srun --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --partition=base /bin/bash
+
+module load gcc12-env/12.1.0
+module load miniconda3/4.12.0
+conda activate anvio-8_biol217
+
+anvi-interactive -c V_jascida_52.db -p V_jascida_52/PROFILE.db
+```
+## Splitting the genome in our good bins 
+
+```
+anvi-split -p V_jascida_52/PROFILE.db -c V_jascida_52.db -C default -o V_jascida_52_SPLIT
+
+# V_jascida_52_SPLIT/V_jascida_52_CLEAN/CONTIGS.db
+
+sed 's/V_jascida_52.db/V_jascida_52_SPLIT\/V_jascida_52_CLEAN\/CONTIGS.db/g' external-genomes.txt > external-genomes-final.txt
+
+```
+
+## Compute Pangenome
+
+```
+anvi-estimate-genome-completeness -e external-genomes.txt
+anvi-estimate-genome-completeness -e external-genomes-final.txt
+```
+-> V_jascida_52 hat nun auch eine redundancy von 5.63% 
+
+```
+anvi-gen-genomes-storage -e external-genomes-final.txt -o V_jascida-GENOMES.db
+
+anvi-pan-genome -g V_jascida-GENOMES.db --project-name V_jascida --num-threads 4                         
+ ```
+
+## Display Pangenome
+
+```
+anvi-display-pan -p V_jascida/V_jascida-PAN.db -g V_jascida-GENOMES.db
+```
+
+
 
 								
 
