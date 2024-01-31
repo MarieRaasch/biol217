@@ -56,3 +56,5 @@ anvi-pan-genome -g My-GENOMES.db --project-name My_pangenome --num-threads 4
 
 ```
 anvi-display-pan -p My_pangenome/My-GENOMES.db -g My-GENOMES.db
+
+anvi-compute-genome-similarity -e external-genomes.txt -o ANI -p ./My_pangenome/My_pangenome-PAN.db -T 12
