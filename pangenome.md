@@ -43,3 +43,16 @@ do
     anvi-run-scg-taxonomy -c $g --num-threads 4
 done```
 
+## Creating pangenome 
+
+### Visualise 
+
+## Create Pangenome 
+
+```
+anvi-gen-genomes-storage -e external-genomes.txt -o My-GENOMES.db
+
+anvi-pan-genome -g My-GENOMES.db --project-name My_pangenome --num-threads 4  
+
+```
+anvi-display-pan -p My_pangenome/My-GENOMES.db -g My-GENOMES.db
