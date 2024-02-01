@@ -180,17 +180,20 @@ Deseq calculates fold2change -> can see whether genes are up or downregulated
 
 5 Locus tags where wt is downregulated 
 
-MM_RS00150: Mt is upregulated by -2.06 
-MM_RS04770: Mt is upregulated by -1.2 
-MM_RS05370: Mt is upregulated by -1.16
-MM_RS07870: Mt is upregulated by -1.15
-MM_RS05335: Mt is upregulated by -1.09
+MM_RS00150: Mt is upregulated by -2.06 Yes
+MM_RS04770: Mt is upregulated by -1.2 Yes
+MM_RS05370: Mt is upregulated by -1.16 Yes
+MM_RS07870: Mt is upregulated by -1.15 Yes
+MM_RS05335: Mt is upregulated by -1.09 Yes
 
 5 Locus tags where wt is upregulated
 
-MM_RS03790: Mt is downregulated by 1.9
-MM_RS06645: Mt is downregulated by 1.71
-MM_RS00155: Mt is downregulated by 1.58
+MM_RS03790: Mt is downregulated by 1.9 yes
+MM_RS06645: Mt is downregulated by 1.71 ?
+MM_RS00155: Mt is downregulated by 1.58 yes
 MM_RS02310: Mt is downregulated by 1.3
 MM_RS00765: Mt is downregulated by 1.23
+
+# Documentation and how to add image 
+![igb](MM_RS03790.png)
 
