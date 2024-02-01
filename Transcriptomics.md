@@ -203,8 +203,8 @@ Find the ORF
 Startcodon: ATG at 2.991.370
 Stoppcodon: TAA at 2.991.187
 Länge in Aminosäuren: 62 AA with stopcodon, 61 AA
-Shine dalgano Sequenz: 
-Name des upstream gens: alaS
+Shine dalgano Sequenz: AGGAG at -7 (G ist letztes Nukleotid bei -7)
+Name des upstream gens: alaS STM14_3414
 Do you think csrA is translated: Yes because of RIBO profile 
 
 ![igb](./Ressources/csra.png)
