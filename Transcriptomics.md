@@ -197,3 +197,14 @@ MM_RS00765: Mt is downregulated by 1.23
 # Documentation and how to add image 
 ![igb](MM_RS03790.png)
 
+##
+Find the ORF 
+
+Startcodon: ATG at 2.991.370
+Stoppcodon: TAA at 2.991.187
+Länge in Aminosäuren: 62 AA with stopcodon, 61 AA
+Shine dalgano Sequenz: 
+Name des upstream gens: alaS
+Do you think csrA is translated: Yes because of RIBO profile 
+
+![igb](./Ressources/csra.png)
