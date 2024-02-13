@@ -327,6 +327,11 @@ Visualize results:
 anvi-interactive -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -C METABAT
 
 ```
+![Screenshot 2024-01-26 at 13-54-52 Refining METABAT__10 from METABAT ](https://github.com/MarieRaasch/biol217/assets/157317805/666d7a73-dc28-48be-954b-8810f264b413)
+
+![Screenshot 2024-01-26 at 13-49-20 Refining METABAT__6 from METABAT ](https://github.com/MarieRaasch/biol217/assets/157317805/bf54e95f-bf67-4770-862f-bff4f3a818b0)
+
+
 
 ## Results
 
@@ -400,6 +405,8 @@ Do you get bins that are chimeric?
 hint: look at the CSS score (explained in the lecture) and the column PASS GUNC in the tables outputs per bin in your gunc_output folder.
 
 In your own words (2 sentences max), explain what is a chimeric bin.
+
+![image](https://github.com/MarieRaasch/biol217/assets/157317805/f56422ce-ee59-44c4-a92b-9448182d99d5)
 
 
 ## Manual Bin refinement 
