@@ -114,6 +114,12 @@ megahit -1 BGR_130305_mapped_R1_clean.fastq.gz -1 BGR_130527_mapped_R1_clean.fas
 
 To view the error file whilst running: `tail file.err`
 
+
+Bandage File: 
+
+![graph](https://github.com/MarieRaasch/biol217/assets/157317805/e17b2132-591f-4266-bc3d-7f067168dcf2)
+
+
 ### Day 3
 
 
