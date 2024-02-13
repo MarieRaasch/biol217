@@ -5,10 +5,21 @@ Creating own directory for our own pangenome:
 
 ## 1. 
 
-```
+```sh
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=128G
+#SBATCH --time=5:00:00
+#SBATCH --job-name=my_pangenome_refined
+#SBATCH --output=my_pangenome_refined.out
+#SBATCH --error=my_pangenome_refined.err
+#SBATCH --partition=base
+#SBATCH --reservation=biol217
+
 cd $WORK/pangenomics/pangenomics2/Genomes_pangenomics
 
-ls *fasta | awk 'BEGIN{FS="_"}{print $1}' > genomes.txt
+ls *fasta > genomes.txt
 
 # remove all contigs <2500 nt
 for g in `cat genomes.txt`
@@ -16,7 +27,7 @@ do
     echo
     echo "Working on $g ..."
     echo
-    anvi-script-reformat-fasta ${g}_scaffolds.fasta \
+    anvi-script-reformat-fasta ${g}.fasta \
                                --min-len 2500 \
                                --simplify-names \
                                -o ${g}_scaffolds_2.5K.fasta
@@ -29,9 +40,9 @@ do
     echo "Working on $g ..."
     echo
     anvi-gen-contigs-database -f ${g}_scaffolds_2.5K.fasta \
-                              -o V_jascida_${g}.db \
+                              -o .db \
                               --num-threads 4 \
-                              -n V_jascida_${g}
+                              -n ${g}
 done
 
 # annotate contigs.db
