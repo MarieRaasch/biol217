@@ -59,21 +59,28 @@ done```
 ### Visualise 
 
 ## Create Pangenome 
-
 ```
+
+
+```sh
 anvi-gen-genomes-storage -e external-genomes.txt -o My-GENOMES.db
 
 anvi-pan-genome -g My-GENOMES.db --project-name My_pangenome --num-threads 4  
 
 ```
+```
 anvi-display-pan -p My_pangenome/My-GENOMES.db -g My-GENOMES.db
 
 anvi-compute-genome-similarity -e external-genomes.txt -o ANI -p ./My_pangenome/My_pangenome-PAN.db -T 12
 
-# anvi-gen-genomes-storage -e external-genomes.txt -o My-GENOMES.db
+```
+```sh
+anvi-gen-genomes-storage -e external-genomes.txt -o My-GENOMES.db
 
-# anvi-pan-genome -g My-GENOMES.db --project-name My_pangenome --num-threads 4  
+anvi-pan-genome -g My-GENOMES.db --project-name My_pangenome --num-threads 4  
+```
 
+```sh
 cd $WORK/pangenomics/pangenomics2
 
 anvi-get-sequences-for-gene-clusters -p ./My_pangenome/My_pangenome-PAN.db -g ./My_pangenome/My-GENOMES.db --min-num-genomes-gene-cluster-occurs 9 --max-num-genes-from-each-genome 1 --concatenate-gene-clusters --output-file ./My_pangenome/My_new_pangenome-SCGs.fa
@@ -89,4 +96,4 @@ echo -e "SCGs_Bayesian_Tree\tnewick\t`cat My_pangenome/My_new_pangenome-SCGs-tri
 
 # import the layers order file
 anvi-import-misc-data -p ./My_pangenome/My_pangenome-PAN.db -t My_pangenome/My_new_pangenome-phylogenomic-layer-order.txt
-
+```
