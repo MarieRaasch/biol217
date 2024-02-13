@@ -327,8 +327,11 @@ Visualize results:
 anvi-interactive -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -C METABAT
 
 ```
+
+## METABAT 10
 ![Screenshot 2024-01-26 at 13-54-52 Refining METABAT__10 from METABAT ](https://github.com/MarieRaasch/biol217/assets/157317805/666d7a73-dc28-48be-954b-8810f264b413)
 
+## METABAT 6 
 ![Screenshot 2024-01-26 at 13-49-20 Refining METABAT__6 from METABAT ](https://github.com/MarieRaasch/biol217/assets/157317805/bf54e95f-bf67-4770-862f-bff4f3a818b0)
 
 
