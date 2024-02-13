@@ -147,6 +147,11 @@ Looking at our report.pdf in local Dektop
 ```sh
 scp sunam236@caucluster.rz.uni-kiel.de:/work_beegfs/sunam236/Metagenomics/3_metaquast_out/report.pdf . 
 ```
+![Screenshot 2024-02-13 160804](https://github.com/MarieRaasch/biol217/assets/157317805/51f63da7-a11f-4f1c-aec2-7442012b4664)
+
+![Screenshot 2024-02-13 160824](https://github.com/MarieRaasch/biol217/assets/157317805/60bb88df-6097-4dcf-bff3-dd4924613b9c)
+
+
 
 **What is your N50 value?**     
 3014
