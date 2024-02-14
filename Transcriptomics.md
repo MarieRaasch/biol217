@@ -172,7 +172,7 @@ jobinfo
 
 Why Rpkm: single ends reads, not paired end reads 
 
-What is tnoar
+What is tnoar: total number of aligned reads of the given library 
 
 Volcano plots: Log2 fold change calculated based on RPKM, shows p-value 
 
@@ -195,7 +195,7 @@ MM_RS02310: Mt is downregulated by 1.3
 MM_RS00765: Mt is downregulated by 1.23
 
 # Documentation and how to add image 
-![igb](MM_RS03790.png)
+![igb](./Ressources/MM_RS03790.png)
 
 ##
 Find the ORF 
