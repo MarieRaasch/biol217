@@ -440,9 +440,9 @@ anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ../6_anvimerge/PROFI
 anvi-refine -c ../5_anvio_profiles/contigs.db -C METABAT -p ../6_anvimerge/PROFILE.db --bin-id METABAT__10
 
 ```
-METABAT 6 Sieht gut aus, nicht wird gelöscht
+METABAT 6 looks good -> Continue with that
 
-METABAT 10 Coverage zu niedrig; mit dem Sample wird nicht weitergearbeitet 
+METABAT 10 Coverage too low -> Bin excluded for further work
 
 
     how abundant are the archaea bins in the 3 samples? (relative abundance)
@@ -457,11 +457,18 @@ Mean coverage: `cd /work_beegfs/sunam236/Metagenomics/ARCHAEA_BIN_REFINEMENT/bin
 
 `cat METABAT__6-mean_coverage.txt`
 
-bin	BGR_130305_bam_file_bam_sorted: 8.200437007296363
+METABAT 6: 
+
+BGR_130305_bam_file_bam_sorted: 8.200437007296363
 
 BGR_130527_bam_file_bam_sorted: 5.316715747262296
 
 BGR_130708_bam_file_bam_sorted: 3.4897028928552145
+
+Abundance: 
+
+![Screenshot 2024-02-14 145835](https://github.com/MarieRaasch/biol217/assets/157317805/27c942f0-1ec2-4417-bc2c-7499c07bb81b)
+
 
 ## Day 5 
 
