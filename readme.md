@@ -488,7 +488,12 @@ ONE final summary to get comprehensive info about your METABAT2 bins:
 
 ```anvi-summarize -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db --metagenome-mode -o ./SUMMARY_METABAT2 -C METABAT2```
 
+Did you get a species assignment to the bins previously identified?
+- METABAT 6: Methanoculleus sp012797575
+- METABAT 10: Methanosarcina flavescens
+Does the HIGH-QUALITY assignment of the bin need revision?
 
+According to Bowers et. al, 2017, a high quality draft has a completeness of >90 % and a contamination of <5 %, which was the case for the bin METABAT 6. So it does not need any further revision. 
 # Day 6 
 
 We will be using Absolute Paths in this tutorial. So, please make sure to use the correct paths. For Example: $WORK/genomics/0_raw_reads/
