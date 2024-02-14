@@ -24,7 +24,7 @@ this is the command `cp`
 
 ## Quality control
 
-Anvio_slurm.txt - Datei für Batch Skript 
+Anvio_slurm.txt -  for the Batch Skript 
 
 
 ```sh
@@ -55,7 +55,7 @@ To run the text `sbatch file.txt`
 To check process `squeue -u sunam236`
 
 
-Kopieren und im Rechner öffnen 
+Copy and open in browser 
 
 ```
 scp sunam236@caucluster.rz.uni-kiel.de:/work_beegfs/sunam236/Metagenomics/1_fastqc/*.html .
