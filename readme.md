@@ -775,6 +775,8 @@ Total genes	(0% <= strains <= 100%)	9849
 
 -> No core genes in out sample: might be artefact 
 
+
+
 # Day 7b 
 
 ```
