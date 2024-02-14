@@ -413,7 +413,7 @@ Do you get bins that are chimeric?
 hint: look at the CSS score (explained in the lecture) and the column PASS GUNC in the tables outputs per bin in your gunc_output folder.
 
 In your own words (2 sentences max), explain what is a chimeric bin: 
-- A chimeric bin, is a bin where contig from different organisms were wrongly grouped together during binning. 
+- A chimeric bin, is a bin where contigs from different organisms were wrongly grouped together during binning. 
 
 <img src="https://github.com/MarieRaasch/biol217/blob/main/Ressources/GUNC_plot.png"> 
 
