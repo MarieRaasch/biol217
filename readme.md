@@ -412,9 +412,10 @@ gunc plot -d ./GUNC/diamond_output/METABAT__6-contigs.diamond.progenomes_2.1.out
 Do you get bins that are chimeric?
 hint: look at the CSS score (explained in the lecture) and the column PASS GUNC in the tables outputs per bin in your gunc_output folder.
 
-In your own words (2 sentences max), explain what is a chimeric bin.
+In your own words (2 sentences max), explain what is a chimeric bin: 
+- A chimeric bin, is a bin where contig from different organisms were wrongly grouped together during binning. 
 
-![image](https://github.com/MarieRaasch/biol217/assets/157317805/f56422ce-ee59-44c4-a92b-9448182d99d5)
+<img src="https://github.com/MarieRaasch/biol217/blob/main/Ressources/GUNC_plot.png"> 
 
 
 ## Manual Bin refinement 
