@@ -616,7 +616,14 @@ jobinfo
 
 How Good is the long reads quality?
 
+<img src="https://https://github.com/MarieRaasch/biol217/blob/main/Ressources/Nanoplot%20before.png"> 
+
+
+<img src="https://https://https://github.com/MarieRaasch/biol217/blob/main/Ressources/Nanoplot%20after.png" width="300">
+
 How many reads do you had before trimming and how many do you have now?
+Before: 15963
+After: 12446
 
 ## Assembly 
 
@@ -697,6 +704,12 @@ echo "---------Multiqc Completed Successfully---------"
 module purge
 jobinfo
 ```
+
+Visualize the assembly using Bandage
+Open Bandage and load the assembly file assembly.gfa from the assembly directory $WORK/genomics/3_hybrid_assembly/006_final_clean.gfa
+
+![Bandage_Graph](https://github.com/MarieRaasch/biol217/assets/157317805/ef91d783-aa36-492c-82c3-161e2eb805e7)
+
 
 # Multi QC report
 
