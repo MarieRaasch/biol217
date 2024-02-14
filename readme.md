@@ -122,8 +122,7 @@ Bandage File:
 - No complex structures
 - The line length is proportional to the contig length
 
-
-![graph](https://github.com/MarieRaasch/biol217/assets/157317805/e17b2132-591f-4266-bc3d-7f067168dcf2)
+<img src="https://github.com/MarieRaasch/biol217/blob/main/Ressources/graph%20(1).png" alt="Description of the image" width="500" height="400">
 
 
 ### Day 3
