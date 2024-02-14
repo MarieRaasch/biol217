@@ -775,6 +775,9 @@ Total genes	(0% <= strains <= 100%)	9849
 
 -> No core genes in out sample: might be artefact 
 
+Visualising the Pangenome in Cytoscape: /work_beegfs/sunam236/pangenomics/01_panaroo/pangenomics_results/final_graph.gml
+
+![final_graph gml](https://github.com/MarieRaasch/biol217/assets/157317805/f599198e-d38d-4772-8bb5-804e940d1412)
 
 
 # Day 7b 
