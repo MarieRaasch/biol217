@@ -332,13 +332,7 @@ anvi-interactive -p ./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db -C
 
 ```
 
-## METABAT 10
-![Screenshot 2024-01-26 at 13-54-52 Refining METABAT__10 from METABAT ](https://github.com/MarieRaasch/biol217/assets/157317805/666d7a73-dc28-48be-954b-8810f264b413)
-
-## METABAT 6 
-![Screenshot 2024-01-26 at 13-49-20 Refining METABAT__6 from METABAT ](https://github.com/MarieRaasch/biol217/assets/157317805/bf54e95f-bf67-4770-862f-bff4f3a818b0)
-
-
+![Metabat Bins](https://github.com/MarieRaasch/biol217/assets/157317805/ff83ee88-4bc4-4c46-9cc5-2d75150ea9e6)
 
 ## Results
 
@@ -354,18 +348,17 @@ bins??
 METABAT 98,68% Coverage and 3,94% Redundancy
 
 Maxbin2: 94,7 % Coverage and 73,68% Redundancy 
+With Metabat:
+How many Archaea bins do you get that are of High Quality? 1 bin
 
-How many Archaea bins do you get that are of High Quality? 1
+How many Bacteria bins do you get that are of High Quality? 14 bins
 
-1
-
-How many Bacteria bins do you get that are of High Quality?
 
 # Day 4 
 
 ## Bin Refinement 
 
-Im Temrinal
+In Terminal
 ```
 anvi-summarize -p./6_anvimerge/PROFILE.db -c ./5_anvio_profiles/contigs.db --list-collections
 
@@ -382,10 +375,18 @@ cp ./METABAT__6-contigs.fa ../../ARCHAEA_BIN_REFINEMENT/
 
 cp ./METABAT__10/*.fa ../../ARCHAEA_BIN_REFINEMENT/
 ```
-```anvi-estimate-genome-completeness -c ./5_anvio_profiles/contigs.db -p ./6_anvimerge/PROFILE.db -C METABAT > METABAT_table.txt
+```
+anvi-estimate-genome-completeness -c ./5_anvio_profiles/contigs.db -p ./6_anvimerge/PROFILE.db -C METABAT > METABAT_table.txt
 ```
 
 -> METABAT__6 & 10 
+
+
+## METABAT 10
+![Screenshot 2024-01-26 at 13-54-52 Refining METABAT__10 from METABAT ](https://github.com/MarieRaasch/biol217/assets/157317805/666d7a73-dc28-48be-954b-8810f264b413)
+
+## METABAT 6 
+![Screenshot 2024-01-26 at 13-49-20 Refining METABAT__6 from METABAT ](https://github.com/MarieRaasch/biol217/assets/157317805/bf54e95f-bf67-4770-862f-bff4f3a818b0)
 
 # Chimera detection in MAGs
 
@@ -443,9 +444,7 @@ METABAT 6 looks good -> Continue with that
 
 METABAT 10 Coverage too low -> Bin excluded for further work
 
-
-    how abundant are the archaea bins in the 3 samples? (relative abundance)
-    **you can also use anvi-inspect -p -c, anvi-script-get-coverage-from-bam or, anvi-profile-blitz. Please look up the help page for each of those commands and construct the appropriate command line
+how abundant are the archaea bins in the 3 samples? (relative abundance)
 
 ```anvi-inspect -p ../6_anvimerge/PROFILE.db -c ../5_anvio_profiles/contigs.db --split-nam ```
 
@@ -491,11 +490,11 @@ Did you get a species assignment to the bins previously identified?
 - METABAT 6: Methanoculleus sp012797575
 - METABAT 10: Methanosarcina flavescens
 Does the HIGH-QUALITY assignment of the bin need revision?
+According to Bowers et. al, 2017, a high quality draft has a completeness of >90 % and a contamination of <5 %, which was the case for the bin METABAT 6. So it does not need any further revision.
 
-According to Bowers et. al, 2017, a high quality draft has a completeness of >90 % and a contamination of <5 %, which was the case for the bin METABAT 6. So it does not need any further revision. 
-# Day 6 
+# Day 6 Genomics
 
-We will be using Absolute Paths in this tutorial. So, please make sure to use the correct paths. For Example: $WORK/genomics/0_raw_reads/
+Assembling and annotating a Genome using Hybrid assembly
 
 `cd $WORK/genomics`
 
@@ -504,6 +503,7 @@ creating output directory:
 ```
 mkdir 1_short_reads_qc
 ```
+## 1. Quality control of the short reads and trimming using fastp and fastqc
 
 ```#!/bin/bash
 #SBATCH --nodes=1
@@ -521,11 +521,13 @@ module load micromamba/1.4.2
 micromamba activate 01_short_reads_qc
 
 
-# creata new folder for output of qc 
+# create a new folder for the output of qc 
 mkdir -p $WORK/genomics/1_short_reads_qc/1_fastqc_raw
 for i in $WORK/genomics/0_raw_reads/short_reads/*.gz; do fastqc $i -o $WORK/genomics/1_short_reads_qc/1_fast_pc_raw -t 32; done
 
-jobinfo```
+jobinfo
+
+```
 
 ```
 1.2 fastp 
@@ -541,15 +543,13 @@ jobinfo```
 # create a new folder for output of qc 
 mkdir -p $WORK/genomics/1_short_reads_qc/3_fastqc_cleaned
 for i in $WORK/genomics/1_short_reads_qc/2_cleaned_reads/*.gz; do fastqc $i -o $WORK/genomics/1_short_reads_qc/3_fastqc_cleaned -t 32; done
-
-
-
+```
 
 How Good is the read quality?
 
 Good 
 
-How many reads do you had before trimming and how many do you have now?
+How many reads did you have before trimming and how many do you have now?
 
 R1
 Before trimming: 1639549
@@ -559,13 +559,13 @@ R2
 Before trimming: 1639549
 After trimming: 1613392
 
-
 Did the quality of the reads improve after trimming?
 
 Yes
 
-# Long reads
-## NanoPlot & Filtlong 
+# Long reads QUality control and trimming 
+
+## NanoPlot (QC)  & Filtlong (Trimming)
 
 ```#!/bin/bash
 #SBATCH --nodes=1
@@ -624,11 +624,14 @@ How many reads do you had before trimming and how many do you have now?
 Before: 15963
 After: 12446
 
-## Assembly 
+## Assembly, Quality check and Genome Annotation:
+- Assembly using Quast
+- Assembly quality check using Quast, CHeckM and CHeckM2
+- Annotation using Prokka
+- Classification using GTDBTK
 
-Strg Shift 7 
-
-```3 Assembly (1 hour)-----------------------------------------------------------
+```
+# 3 Assembly (1 hour)-----------------------------------------------------------
 echo "---------Unicycler Assembly pipeline started---------"
 micromamba activate 03_unicycler
 cd $WORK/genomics
@@ -716,7 +719,6 @@ Open Bandage and load the assembly file assembly.gfa from the assembly directory
 
 Good read quality (98,4% passed the filter) 
 
-
 ### Why did we use Hybrid assembler?
 To combine short reads and long reads to get a better assembly. 
 
@@ -730,10 +732,8 @@ For long reads you do not use paired ends as it is not neccesary.
 
 ### Write down about the classification of genome we have used here
 
-
 d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides sp002491635
-
-bacter				
+				
 
 # Day 7 
 ## Run Panaroo statistics 
