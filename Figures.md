@@ -15,3 +15,7 @@ BGR 130527 R1 (left) R2 (right)
 BGR 130708 R1 (left) R2 (right)
 
 <img src="https://github.com/MarieRaasch/biol217/blob/main/Ressources/BGR_130708_mapped_R1.png" width="500"/> <img src="https://github.com/MarieRaasch/biol217/blob/main/Ressources/BGR_130708_mapped_R2.png" width="500"/>
+
+## Fastp report 
+
+<img src="https://github.com/MarieRaasch/biol217/blob/main/Ressources/Fastp report.png" width="500"/>
