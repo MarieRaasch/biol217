@@ -101,6 +101,8 @@ done
 
 ### megahit
 
+- ultra-fast and memory-efficient NGS assembler optimized for metagenomes
+
 ```
 cd /work_beegfs/sunam236/Metagenomics/2_fastp
 
@@ -141,7 +143,7 @@ To visualize contig graph in Bandage, the first step is to convert the fasta fil
 
 ## Quality Assessment
 
-**QU**ality **AS**sessment **T**ool to evaluate genome assembly.
+**QU**ality **AS**sessment **T**ool QUAST to evaluate genome assembly.
 
 metaquast -t 6 -o ? -m 1000 ?
 
@@ -158,7 +160,6 @@ scp sunam236@caucluster.rz.uni-kiel.de:/work_beegfs/sunam236/Metagenomics/3_meta
 ![Screenshot 2024-02-13 160804](https://github.com/MarieRaasch/biol217/assets/157317805/51f63da7-a11f-4f1c-aec2-7442012b4664)
 
 ![Screenshot 2024-02-13 160824](https://github.com/MarieRaasch/biol217/assets/157317805/60bb88df-6097-4dcf-bff3-dd4924613b9c)
-
 
 
 **What is your N50 value?**     
@@ -178,8 +179,7 @@ N50 is the length for which the collection of all contigs of that length or long
 
 ## Genomes Binning 
 
-The first thing you will do is format your fasta sequence IDs. Anvi’o (which you will use later) needs this step to work
-properly. Run this with your contigs and with your clean reads (Hint: fastp output). As the names get changed, you need to run it on your assembly file, otherwise the names of the contigs won't match the names of the initial reads (essential for the mapping step below).
+1.  format fasta sequence IDs -> Anvi’o (which you will use later) needs this step to work properly. Run this with your contigs and with your clean reads (Hint: fastp output). As the names get changed, you need to run it on your assembly file, otherwise the names of the contigs won't match the names of the initial reads (essential for the mapping step below).
 
 Batch Script
 
@@ -191,9 +191,10 @@ anvi-script-reformat-fasta final.contigs.fa -o ../3_binning_out/contigs.anvio.fa
 
 ## Mapping 
 
-Then you need to map your raw reads onto your assembled contigs. Mapping will be done using bowtie2. Use the following command to index your mapping reference fasta file. Needed for the next steps and basically makes mapping faser.
+Then you need to map your raw reads onto your assembled contigs. Mapping will be done using bowtie2. Use the following command to index your mapping reference fasta file. Needed for the next steps and makes mapping faser.
 
-```cd /work_beegfs/sunam236/Metagenomics/3_binning_out
+```
+cd /work_beegfs/sunam236/Metagenomics/3_binning_out
 
 module load bowtie2
 bowtie2-build contigs.anvio.fa contigs.anvio.fa.index
@@ -230,7 +231,8 @@ samtools view -bS BGR_130708.sam > BGR_130708_bam_file.bam
 
 # Contigs Data preparation 
 
-You need to convqqase is an anvi’o contigs-db database that contains key information associated with your sequences.
+"A contigs database is an anvi’o database that contains key information associated with your sequences" (anvio.org) 
+"Contigs database is a modern, more talented form of a FASTA file, where you can store additional information about your sequences " 
 
 ```
 cd /work_beegfs/sunam236/Metagenomics/3_binning_out
@@ -252,7 +254,7 @@ anvi-run-hmms -c contigs.db --num-threads 4
 Once you have your contigs database ready, and optionally your HMMs are run, you can take a quick look at it using the program anvi-display-contigs-stats:
 
 ```sh
-srun --reservation=biol217 --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --nodelist=n100 --partition=base /bin/bash
+srun --pty --mem=10G --nodes=1 --tasks-per-node=1 --cpus-per-task=1 --partition=base /bin/bash
 ```
 
 ```sh
@@ -261,14 +263,14 @@ conda activate anvio-8
 anvi-display-contigs-stats contigs.db
 ```
 
-Neues Terminal Fenster: 
+New Terminal window: 
 
 ```sh
 ssh -L 8060:localhost:8080 sunam236@caucluster.rz.uni-kiel.de
 ssh -L 8080:localhost:8080 n100
 ```
 
-Im Browser
+In Browser
 
 ```http://127.0.0.1:8060```
 
