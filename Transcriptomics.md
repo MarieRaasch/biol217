@@ -194,6 +194,11 @@ MM_RS00155: Mt is downregulated by 1.58 yes
 MM_RS02310: Mt is downregulated by 1.3
 MM_RS00765: Mt is downregulated by 1.23
 
+Volcano plot of log2 fold change adjusted p-value mt vs wildtype
+
+![Volcano_plot](https://github.com/MarieRaasch/biol217/assets/157317805/b3e04b03-b094-4161-8cea-3295d78a4fb0)
+
+
 # Documentation and how to add image 
 ![igb](./Ressources/MM_RS03790.png)
 
