@@ -5,10 +5,8 @@ Login Data: ssh -X sunam236@caucluster.rz.uni-kiel.de
 What we have learned so far?
 
 1. Basic Linux 
-2. Bioinfomrtics basic understandings 
-3. Linus comands 
-
-- copy from one folder to another:
+2. Bioinformatics basic understandings 
+3. Linux commands 
 
 Block of code 
 
@@ -20,13 +18,13 @@ this is the command `cp`
 
 ### Task: Practice how to upload images and links 
 
-# Day 2 
+# Day 2 From raw reads to MAGs
 
-## Quality control
+## 1. Quality control of the reads
 
-Anvio_slurm.txt -  for the Batch Skript 
+Anvio_slurm.txt - file to run the Batch Skript 
 
-
+FastQC to evaluate quality of the reads
 ```sh
 #!/bin/bash
 #SBATCH --nodes=1
@@ -38,7 +36,7 @@ Anvio_slurm.txt -  for the Batch Skript
 #SBATCH --error=fastqc.err
 #SBATCH --partition=base
 #SBATCH --reservation=biol217
-
+# Activate conda environment: 
 module load gcc12-env/12.1.0
 module load miniconda3/4.12.0
 conda activate anvio-8
@@ -55,13 +53,13 @@ To run the text `sbatch file.txt`
 To check process `squeue -u sunam236`
 
 
-Copy and open in browser 
+Copy and open in browser to see plots:
 
 ```
 scp sunam236@caucluster.rz.uni-kiel.de:/work_beegfs/sunam236/Metagenomics/1_fastqc/*.html .
 ```
 
-### fastp
+### fastp for trimming the reads
 
 > `--html` creates an .html report file in html format\
 >`-i` R1 
@@ -72,8 +70,6 @@ scp sunam236@caucluster.rz.uni-kiel.de:/work_beegfs/sunam236/Metagenomics/1_fast
 >`-t` trim tail 1, default is 0, here 6 bases are trimmed\
 >`-q` 20 reads with a phred score of <=20 are trimmed
 
-
-fastp -i ? -I ? -R ? -o ? -O ? -t 6 -q 20
 
 Sample 1 
 ```
@@ -99,9 +95,10 @@ do
 
 done
 ```
+- Fastp report shows how many reads were trimmed 
 
+## 2. Assembly 
 
-## Assembly 
 ### megahit
 
 ```
