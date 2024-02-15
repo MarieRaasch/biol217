@@ -19,3 +19,10 @@ BGR 130708 R1 (left) R2 (right)
 ## Fastp report 
 
 <img src="https://github.com/MarieRaasch/biol217/blob/main/Ressources/Fastp report.png" width="500"/>
+
+## stats of contigs database after contigs data preparation 
+
+(https://github.com/MarieRaasch/biol217/blob/main/Ressources/Contigs%20DB%20Stats.pdf)
+(https://github.com/MarieRaasch/biol217/blob/main/Ressources/Contigs%20DB%20Stats%20Archaea.pdf)
+
+
