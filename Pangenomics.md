@@ -3,6 +3,30 @@
 Creating own directory for our own pangenome: 
 `mkdir pangenomics2`
 
+## Genomes downloaded from the NCBI database: 
+Bacterial Taxon	+ NCBI Reference Sequence
+
+Clostridium botulinum	NC_009495.1
+
+Clostridium perfringens	NZ_CP075979.1
+
+Chlostridium tetani	NC_004557.1
+
+Pseudomonas putida	NC_021505.1
+
+Vibrio cholerae	NZ_CP043554.1
+
+Vibrio harveyi	NZ_CP125875.1
+
+Aliivibrio fischeri	NC_011184.1
+
+Vibrio anguillarum	NZ_CP031479.1
+
+Vibrio parahaemolyticus	NC_004603.1
+
+Vibrio coralliilyticus	NZ_CP063051.1
+
+
 ## 1. 
 
 ```sh
