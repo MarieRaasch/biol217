@@ -782,6 +782,26 @@ columns_to_sum <- c("X241155E", "X241156E", "X241157E", "X241158E", "X241159E")
 
 # Sum up selected columns
 column_sums <- colSums(df[columns_to_sum])
+# Calculate Jaccard similarity for each pair of genomes
+similarities <- list()
+
+for (i in 1:(ncol(df) - 1)) {
+  for (j in (i + 1):ncol(df)) {
+    genome1 <- df[, i]
+    genome2 <- df[, j]
+    intersection <- sum(genome1 & genome2)  # Count the number of genes present in both genomes
+    union <- sum(genome1 | genome2)         # Count the number of unique genes in both genomes
+    similarity <- intersection / union      # Calculate Jaccard similarity coefficient
+    pair <- paste(names(df)[i], names(df)[j], sep = " - ")
+    similarities[[pair]] <- similarity
+  }
+}
+
+# Find the pair with the highest similarity
+most_similar_pair <- names(similarities)[which.max(unlist(similarities))]
+similarity_score <- similarities[[most_similar_pair]]
+
+print(paste("The most similar pair of genomes is", most_similar_pair, "with a similarity score of", similarity_score))
 
 
 ```
@@ -797,6 +817,7 @@ X241158E: 4702
 
 X241159E: 3932
 
+Output of the similarity test in R: "The most similar pair of genomes is X241156E - X241159E with a similarity score of 0.998729674796748"
 
 
 -> No core genes in out sample: might be artefact 
