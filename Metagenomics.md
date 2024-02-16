@@ -772,6 +772,33 @@ Shell genes	(15% <= strains < 95%)	9849
 Cloud genes	(0% <= strains < 15%)	0
 Total genes	(0% <= strains <= 100%)	9849
 
+Uploaded the table gene_presence_absence.Rtab into R Studio: 
+
+```
+df <- read.delim("gene_presence_absence.Rtab", header = TRUE)
+
+
+columns_to_sum <- c("X241155E", "X241156E", "X241157E", "X241158E", "X241159E")
+
+# Sum up selected columns
+column_sums <- colSums(df[columns_to_sum])
+
+
+```
+Numer of genes present: 
+
+X241155E: 3534
+
+X241156E: 3935
+
+X241157E: 0 -> No core genes because we have a hit of 0 here !!!
+
+X241158E: 4702
+
+X241159E: 3932
+
+
+
 -> No core genes in out sample: might be artefact 
 
 Visualising the Pangenome in Cytoscape: /work_beegfs/sunam236/pangenomics/01_panaroo/pangenomics_results/final_graph.gml
