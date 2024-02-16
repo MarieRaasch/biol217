@@ -121,10 +121,11 @@ echo -e "SCGs_Bayesian_Tree\tnewick\t`cat My_pangenome/My_new_pangenome-SCGs-tri
 # import the layers order file
 anvi-import-misc-data -p ./My_pangenome/My_pangenome-PAN.db -t My_pangenome/My_new_pangenome-phylogenomic-layer-order.txt
 ```
+![Bildschirmfoto_16-2-2024_162728_](https://github.com/MarieRaasch/biol217/assets/157317805/f232d243-003c-41c1-9bed-2f0a9d53e908)
 
-![My_pangenome_page-0001](https://github.com/MarieRaasch/biol217/assets/157317805/b3dcf94b-7f64-495b-ad37-0c488d191949)
+PDF for better Quality:
 
+[My_pangenome.pdf](https://github.com/MarieRaasch/biol217/files/14312891/My_pangenome.pdf)
 
-[My_pangenome.pdf](https://github.com/MarieRaasch/biol217/files/14301483/My_pangenome.pdf)
 
 
