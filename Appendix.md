@@ -15,9 +15,8 @@
 |----------------------|-----------------------|
 | ![BGR130708 R1](https://github.com/MarieRaasch/biol217/blob/main/Ressources/BGR_130708_mapped_R1.png) | ![BGR130708 R2](https://github.com/MarieRaasch/biol217/blob/main/Ressources/BGR_130708_mapped_R2.png) |
 
-## Fastp report 
+## Fig. 3 Fastp report of the MAG reads
 
-Fig. 3 Fastp report of the MAG
 
 <img src="https://github.com/MarieRaasch/biol217/blob/main/Ressources/Fastp report.png" width="500"/>
 
