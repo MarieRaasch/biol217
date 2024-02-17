@@ -1,6 +1,8 @@
 # Day 8 
 
-Transcriptomics 
+## Transcriptomics 
+
+### Test run with prepared data: 
 
 ```
 
@@ -70,6 +72,8 @@ jobinfo
 
 ## Doing our own data 
 
+1. Downloading the sequences from the NCBI database 
+
 ```sh
 module load gcc12-env/12.1.0
 module load miniconda3/4.12.0
@@ -99,7 +103,7 @@ grabseqs sra -t 12 SRR4018516 # mt_1
 grabseqs sra -t 12 SRR4018517 # mt_2
 
 ```
-Run fastqc 
+Run fastqc for quality control & Reademption for RNA-seq pipeline
 
 ```sh
 mkdir ../qc_reports
@@ -178,38 +182,41 @@ Volcano plots: Log2 fold change calculated based on RPKM, shows p-value
 
 Deseq calculates fold2change -> can see whether genes are up or downregulated 
 
-5 Locus tags where wt is downregulated 
+Up/Downregulation of the Mutant
 
-MM_RS00150: Mt is upregulated by -2.06 Yes
-MM_RS04770: Mt is upregulated by -1.2 Yes
-MM_RS05370: Mt is upregulated by -1.16 Yes
-MM_RS07870: Mt is upregulated by -1.15 Yes
-MM_RS05335: Mt is upregulated by -1.09 Yes
-
-5 Locus tags where wt is upregulated
-
-MM_RS03790: Mt is downregulated by 1.9 yes
-MM_RS06645: Mt is downregulated by 1.71 ?
-MM_RS00155: Mt is downregulated by 1.58 yes
-MM_RS02310: Mt is downregulated by 1.3
-MM_RS00765: Mt is downregulated by 1.23
+| Gene ID   | Regulation    | Log2Fold Change | Verification in IGB | 
+|-----------|---------------|-----------------|-------------|
+| MM_RS00150| upregulated   | 2.06            | Yes         |
+| MM_RS04770| upregulated   | 1.2             | Yes         |
+| MM_RS05370| upregulated   | 1.16            | Yes         |
+| MM_RS07870| upregulated   | 1.15            | Yes         |
+| MM_RS05335| upregulated   | 1.09            | Yes         |
+| MM_RS03790| downregulated | -1.9            | Yes         |
+| MM_RS06645| downregulated | -1.71           | Yes         |
+| MM_RS00155| downregulated | -1.58           | Yes         |
+| MM_RS02310| downregulated | -1.3            | Yes         |
+| MM_RS00765| downregulated | -1.23           | Yes         |
 
 Volcano plot of log2 fold change adjusted p-value mt vs wildtype
 
 ![Volcano_plot](https://github.com/MarieRaasch/biol217/assets/157317805/b3e04b03-b094-4161-8cea-3295d78a4fb0)
 
 
-# Documentation and how to add image 
+# Locus tag MM_RS03790 ∆sRNA154 strain is downregulated in comparison to wild type. 
 ![igb](./Ressources/MM_RS03790.png)
 
 ##
 Find the ORF 
 
-Startcodon: ATG at 2.991.370
-Stoppcodon: TAA at 2.991.187
-Länge in Aminosäuren: 62 AA with stopcodon, 61 AA
-Shine dalgano Sequenz: AGGAG at -7 (G ist letztes Nukleotid bei -7)
-Name des upstream gens: alaS STM14_3414
-Do you think csrA is translated: Yes because of RIBO profile 
+|                     |                              |
+|-------------------------------|-------------------------------------|
+| Startcodon                    | ATG at 2.991.370                    |
+| Stoppcodon                    | TAA at 2.991.187                    |
+| Length in Aminosäuren        | 62 AA with stopcodon, 61 AA         |
+| Shine dalgano Sequenz         | AGGAG at -7 (G is last nucleotide at -7) |
+| Name des upstream gens        | alaS STM14_3414                    |
+| Do you think csrA is translated | Yes because of RIBO-profile       |
+
+## Open reading frame encoding csrA; Ribosome and RNA profiling for Salmonella enterica serovar Typhimurium wild type (wt) and csrA mutant (csrA). Ribo profiling data were visualized in integrated genome browser (IGB).
 
 ![igb](./Ressources/csra.png)
